@@ -5,7 +5,7 @@ export default styled.div`
   background: ${colors.grey_100};
   margin-top: 2rem;
   border-radius: 2px;
-  box-shadow: 0 9px 0 -6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 12px 0 -6px rgba(0, 0, 0, 0.1);
   width: 100%;
   input {
     all: unset;
