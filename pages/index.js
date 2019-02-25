@@ -78,7 +78,7 @@ const BusRoutes = styled.section`
   padding-left: 2rem;
   padding-right: 2rem;
   margin-top: auto;
-  padding-bottom: 1rem;
+  padding-bottom: 1rem 
   margin-bottom: 1rem;
   &::-webkit-scrollbar {
     display: none;
