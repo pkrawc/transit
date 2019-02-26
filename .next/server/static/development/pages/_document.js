@@ -2208,22 +2208,30 @@ function (_NextDoc) {
           lineNumber: 27
         },
         __self: this
+      }), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("link", {
+        href: "https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css",
+        rel: "stylesheet",
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 31
+        },
+        __self: this
       })), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("body", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 32
+          lineNumber: 36
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(next_document__WEBPACK_IMPORTED_MODULE_8__["Main"], {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 33
+          lineNumber: 37
         },
         __self: this
       }), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(next_document__WEBPACK_IMPORTED_MODULE_8__["NextScript"], {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 34
+          lineNumber: 38
         },
         __self: this
       })));

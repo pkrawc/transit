@@ -19,3 +19,6 @@ export const colors = {
 }
 
 export const apiKey = "iX8ztmhTKsrgQsi4wZWRYMaeg"
+
+export const mapboxKey =
+  "pk.eyJ1IjoicGF0cmljay1rcmF3Y3p5a293c2tpIiwiYSI6ImNqNGVrd2s5djB2bG0ydm5odndoZ24wbWgifQ.cG1Bd5RQ9SM8J1ErBHKIVQ"

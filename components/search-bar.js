@@ -12,7 +12,7 @@ export default styled.div`
     font-size: 1.5rem;
     box-sizing: border-box;
     display: block;
-    width: calc(100% - 4rem);
+    width: calc(100% - 6rem);
     margin-left: 6rem;
     padding: 2rem 0;
   }

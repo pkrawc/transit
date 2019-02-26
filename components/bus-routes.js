@@ -47,17 +47,14 @@ export default props => {
 
 const BusRoutes = styled.section`
   position: relative;
-  overflow-x: auto;
   display: flex;
+  padding: 0 2rem 1rem;
+  margin: auto 0 1rem;
+  scroll-padding-left: 2rem;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: -ms-autohiding-scrollbar;
-  scroll-padding-left: 2rem;
-  padding-left: 2rem;
-  padding-right: 2rem;
-  margin-top: auto;
-  padding-bottom: 1rem;
-  margin-bottom: 1rem;
+  overflow-x: auto;
   &::-webkit-scrollbar {
     display: none;
   }

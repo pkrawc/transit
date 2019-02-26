@@ -34,13 +34,14 @@ function _templateObject() {
 /*!**********************!*\
   !*** ./constants.js ***!
   \**********************/
-/*! exports provided: colors, apiKey */
+/*! exports provided: colors, apiKey, mapboxKey */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "colors", function() { return colors; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "apiKey", function() { return apiKey; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mapboxKey", function() { return mapboxKey; });
 var colors = {
   blue_100: "#F2F2FF",
   blue_300: "#8F8DF4",
@@ -59,6 +60,7 @@ var colors = {
   grey_900: "#252526"
 };
 var apiKey = "iX8ztmhTKsrgQsi4wZWRYMaeg";
+var mapboxKey = "pk.eyJ1IjoicGF0cmljay1rcmF3Y3p5a293c2tpIiwiYSI6ImNqNGVrd2s5djB2bG0ydm5odndoZ24wbWgifQ.cG1Bd5RQ9SM8J1ErBHKIVQ";
 
 /***/ }),
 

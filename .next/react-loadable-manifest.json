@@ -6,5 +6,21 @@
       "file": "static/chunks/0.js",
       "publicPath": "static/chunks/0.js"
     }
+  ],
+  "../components/map-box": [
+    {
+      "id": "./components/map-box.js",
+      "name": "./components/map-box.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    }
+  ],
+  "mapbox-gl": [
+    {
+      "id": "./node_modules/mapbox-gl/dist/mapbox-gl.js",
+      "name": "./node_modules/mapbox-gl/dist/mapbox-gl.js",
+      "file": "static/chunks/1.js",
+      "publicPath": "static/chunks/1.js"
+    }
   ]
 }

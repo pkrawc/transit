@@ -1,16 +1,20 @@
-import { useRef } from "react"
 import styled from "styled-components"
+import dynamic from "next/dynamic"
 import { colors } from "constants"
-import useMapBox from "hooks/useMapBox"
 import Icon from "components/icon"
 import SearchBar from "components/search-bar"
 import BusRoutes from "components/bus-routes"
 
+const MapBox = dynamic({
+  loader: () => import("../components/map-box"),
+  loading: () => <div className="map-loader" />,
+  ssr: false
+})
+
 export default props => {
-  const container = useRef(null)
-  const map = useMapBox(container)
   return (
-    <Main ref={container}>
+    <Main>
+      <MapBox />
       <Header>
         <Icon name="menu" />
         <Wallet>
@@ -20,8 +24,18 @@ export default props => {
           <Icon name="wallet-outline" />
         </Wallet>
         <SearchBar>
-          <input type="text" className="source" value="Your Location" />
-          <input type="text" className="destination" value="900 N Franklin St" />
+          <input
+            onChange={e => console.log(e.target.value)}
+            type="text"
+            className="source"
+            value="Your Location"
+          />
+          <input
+            onChange={e => console.log(e.target.value)}
+            type="text"
+            className="destination"
+            value="900 N Franklin St"
+          />
           <span className="dotted-line" />
         </SearchBar>
       </Header>
@@ -32,17 +46,28 @@ export default props => {
 
 const Main = styled.main`
   min-height: 100vh;
-  background: ${colors.grey_300};
+  /* background: ${colors.grey_300}; */
   display: flex;
   flex-direction: column;
+  .map-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: ${colors.blue_300};
+    z-index: -1;
+  }
 `
 
 const Header = styled.header`
+  position: relative;
   padding: 2rem;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+  z-index: 1;
   .mdi-menu {
     width: 5rem;
     height: 5rem;
