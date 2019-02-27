@@ -1,6 +1,7 @@
 import styled from "styled-components"
+import axios from "axios"
 import dynamic from "next/dynamic"
-import { colors } from "constants"
+import { colors, apiKey } from "constants"
 import Icon from "components/icon"
 import SearchBar from "components/search-bar"
 import BusRoutes from "components/bus-routes"
@@ -11,10 +12,10 @@ const MapBox = dynamic({
   ssr: false
 })
 
-export default props => {
+const Home = props => {
   return (
     <Main>
-      <MapBox />
+      <MapBox buses={props.buses} />
       <Header>
         <Icon name="menu" />
         <Wallet>
@@ -42,6 +43,19 @@ export default props => {
       <BusRoutes />
     </Main>
   )
+}
+
+Home.getInitialProps = async () => {
+  const url = "http://www.ctabustracker.com/bustime/api/v2/getvehicles"
+  try {
+    const { data } = await axios.get(url, {
+      params: { key: apiKey, rt: "72", format: "json" },
+      crossdomain: true
+    })
+    return { buses: data["bustime-response"]["vehicle"] }
+  } catch (err) {
+    return { buses: null, error: err }
+  }
 }
 
 const Main = styled.main`
@@ -89,3 +103,5 @@ const Wallet = styled.div`
     color: ${colors.grey_500};
   }
 `
+
+export default Home
