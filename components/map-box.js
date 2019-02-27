@@ -1,16 +1,17 @@
-import React, { useCallback, useRef, useLayoutEffect } from "react"
+import React, { useCallback, useRef, useLayoutEffect, useState } from "react"
 import styled from "styled-components"
 import mapbox from "mapbox-gl"
 import { mapboxKey } from "constants"
 
 const useMap = ref => {
-  const buildMap = useCallback(() => {
+  const buildMap = useCallback(async () => {
     mapbox.accessToken = mapboxKey
     new mapbox.Map({
       container: ref.current,
       style: "mapbox://styles/patrick-krawczykowski/cjsl7x3mk01hg1fquho6enkhs",
-      center: [-87.678, 41.91],
-      zoom: 13.5
+      center: [-87.64, 41.92],
+      zoom: 13.33,
+      pitch: 50
     })
   }, [ref.current])
   useLayoutEffect(() => {
