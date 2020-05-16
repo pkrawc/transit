@@ -9,13 +9,13 @@ import BusRoutes from "components/bus-routes"
 const MapBox = dynamic({
   loader: () => import("../components/map-box"),
   loading: () => <div className="map-loader" />,
-  ssr: false
+  ssr: false,
 })
 
-const Home = props => {
+export default function Home({ buses }) {
   return (
     <Main>
-      <MapBox buses={props.buses} />
+      <MapBox buses={buses} />
       <Header>
         <Icon name="menu" />
         <Wallet>
@@ -26,13 +26,13 @@ const Home = props => {
         </Wallet>
         <SearchBar>
           <input
-            onChange={e => console.log(e.target.value)}
+            onChange={(e) => console.log(e.target.value)}
             type="text"
             className="source"
             value="Your Location"
           />
           <input
-            onChange={e => console.log(e.target.value)}
+            onChange={(e) => console.log(e.target.value)}
             type="text"
             className="destination"
             value="900 N Franklin St"
@@ -50,7 +50,7 @@ Home.getInitialProps = async () => {
   try {
     const { data } = await axios.get(url, {
       params: { key: apiKey, rt: "72", format: "json" },
-      crossdomain: true
+      crossdomain: true,
     })
     return { buses: data["bustime-response"]["vehicle"] }
   } catch (err) {
@@ -60,7 +60,6 @@ Home.getInitialProps = async () => {
 
 const Main = styled.main`
   min-height: 100vh;
-  /* background: ${colors.grey_300}; */
   display: flex;
   flex-direction: column;
   .map-loader {
@@ -103,5 +102,3 @@ const Wallet = styled.div`
     color: ${colors.grey_500};
   }
 `
-
-export default Home

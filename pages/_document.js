@@ -1,25 +1,40 @@
-import { default as NextDoc, Head, Main, NextScript } from "next/document"
-import { ServerStyleSheet, StyleSheetManager } from "styled-components"
+import React, { Fragment } from "react"
+import { default as NextDoc, Html, Head, Main, NextScript } from "next/document"
+import { ServerStyleSheet } from "styled-components"
 
 export default class Document extends NextDoc {
-  static getInitialProps({ renderPage }) {
+  static async getInitialProps(ctx) {
     const sheet = new ServerStyleSheet()
-    const page = renderPage(App => props => (
-      <StyleSheetManager sheet={sheet.instance}>
-        <App {...props} />
-      </StyleSheetManager>
-    ))
-    const styles = sheet.getStyleElement()
-    return { ...page, styles }
+    const originalRenderPage = ctx.renderPage
+
+    try {
+      ctx.renderPage = () =>
+        originalRenderPage({
+          enhanceApp: (App) => (props) =>
+            sheet.collectStyles(<App {...props} />),
+        })
+
+      const initialProps = await NextDoc.getInitialProps(ctx)
+      return {
+        ...initialProps,
+        styles: (
+          <Fragment>
+            {initialProps.styles}
+            {sheet.getStyleElement()}
+          </Fragment>
+        ),
+      }
+    } finally {
+      sheet.seal()
+    }
   }
   render() {
     return (
-      <html lang="en">
+      <Html>
         <Head>
           <meta charSet="utf-8" />
           <meta name="theme-color" content="#3330EA" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
-          {this.props.styles}
           <link
             href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:200,400,600,700"
             rel="stylesheet"
@@ -37,7 +52,7 @@ export default class Document extends NextDoc {
           <Main />
           <NextScript />
         </body>
-      </html>
+      </Html>
     )
   }
 }
