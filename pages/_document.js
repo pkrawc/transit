@@ -39,14 +39,6 @@ export default class Document extends NextDoc {
             href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:200,400,600,700"
             rel="stylesheet"
           />
-          <link
-            rel="stylesheet"
-            href="https://cdn.materialdesignicons.com/3.4.93/css/materialdesignicons.min.css"
-          />
-          <link
-            href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css"
-            rel="stylesheet"
-          />
         </Head>
         <body>
           <Main />

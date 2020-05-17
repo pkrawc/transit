@@ -1,42 +1,37 @@
 import React from "react"
 import styled from "styled-components"
-import { colors } from "constants"
-import Icon from "components/icon"
 
 const routes = [
-  { number: 66, eta: "3 mins", transfer: false, selected: true },
-  { number: 87, eta: "7 mins", transfer: false, selected: false },
-  { number: 44, eta: "5 mins", transfer: false, selected: false },
-  { number: 56, eta: "9 mins", transfer: true, selected: false },
-  { number: 58, eta: "4 mins", transfer: false, selected: false },
-  { number: 112, eta: "12 mins", transfer: false, selected: false }
+  { number: 66, eta: "3 mins", selected: true },
+  { number: 87, eta: "7 mins", selected: false },
+  { number: 44, eta: "5 mins", selected: false },
+  { number: 56, eta: "9 mins", selected: false },
+  { number: 58, eta: "4 mins", selected: false },
+  { number: 112, eta: "12 mins", selected: false },
 ]
 
-export default props => {
+export default (props) => {
   return (
     <BusRoutes>
       {routes.map((route, i) => {
         return (
           <Route
             key={i}
-            onClick={e => console.log(e.target)}
-            className={route.selected && "selected"}>
-            <span>
-              <Icon name="bus" />
-              <h3># {route.number}</h3>
-            </span>
-            <span>
-              <Icon name="timer-sand" />
+            onClick={(e) => console.log(e.target)}
+            className={route.selected && "selected"}
+          >
+            <div>
+              <span className="mdi mdi-timer-sand"></span>
               <p>
                 <strong>{route.eta}</strong>
               </p>
-            </span>
-            <span>
-              <Icon name="directions-fork" />
+            </div>
+            <div>
+              <span className="mdi mdi-bus-stop"></span>
               <p>
-                <strong>{route.transfer ? "Transfer" : "Direct"}</strong>
+                <strong>2000 Halsted</strong>
               </p>
-            </span>
+            </div>
           </Route>
         )
       })}
@@ -67,27 +62,30 @@ const BusRoutes = styled.section`
 const Route = styled.div`
   scroll-snap-align: start;
   flex: 0 0 auto;
-  width: 16rem;
-  height: 16rem;
-  background: ${colors.grey_100};
-  border-radius: 2px;
-  box-shadow: 0 12px 0 -6px rgba(0, 0, 0, 0.1);
+  width: calc(100% - 4rem);
+  max-width: 40rem;
+  background: ${({ theme }) => theme.colors.grey_100};
+  border-radius: 0.25rem;
+  box-shadow: ${({ theme }) => theme.shadows[0]};
   padding: 2rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   &.selected {
-    background: ${colors.grey_900};
-    color: ${colors.blue_100};
+    background: ${({ theme }) => theme.colors.grey_900};
+    color: ${({ theme }) => theme.colors.blue_100};
   }
   .mdi {
-    color: ${colors.grey_500};
+    color: ${({ theme }) => theme.colors.grey_500};
     margin-right: 1rem;
   }
-  > span {
+  div {
     display: flex;
     align-items: center;
     margin-top: 1rem;
+    &:not(:last-of-type) {
+      margin-bottom: 1rem;
+    }
   }
   &:not(:last-of-type) {
     margin-right: 2rem;
