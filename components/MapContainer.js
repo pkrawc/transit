@@ -12,52 +12,55 @@ const Container = styled.div`
   z-index: 0;
 `
 
-const vehicleLayer = ({ vid, lon, lat, hdg }) => {
-  console.log("making a layer")
-  return {
-    id: vid,
-    type: "symbol",
-    source: {
-      type: "geojson",
-      data: {
-        type: "FeatureCollection",
-        features: [
-          {
-            type: "Feature",
-            geometry: {
-              type: "Point",
-              coordinates: [lon, lat],
-            },
+const vehicleLayer = ({ vid, lon, lat, hdg }) => ({
+  id: vid,
+  type: "symbol",
+  source: {
+    type: "geojson",
+    data: {
+      type: "FeatureCollection",
+      features: [
+        {
+          type: "Feature",
+          geometry: {
+            type: "Point",
+            coordinates: [lon, lat],
           },
-        ],
-      },
+        },
+      ],
     },
-    layout: {
-      "icon-image": "transit-bus",
-      "icon-size": 0.5,
-      "icon-pitch-alignment": "map",
-      "icon-rotate": parseInt(hdg),
-    },
-    paint: {
-      "icon-halo-color": "rgba(0,0,0,0.5)",
-      "icon-halo-width": 40,
-    },
-  }
-}
+  },
+  layout: {
+    "icon-image": "transit-bus",
+    "icon-size": 0.5,
+    "icon-pitch-alignment": "map",
+    "icon-rotate": parseInt(hdg),
+  },
+  paint: {
+    "icon-halo-color": "rgba(0,0,0,0.5)",
+    "icon-halo-width": 40,
+  },
+})
 
 export default function VehicleMap({ vehicles }) {
   const [oldVehicles, setOld] = useState([])
   const containerRef = useRef(null)
   const mapRef = useRef(null)
+  const [loaded, setLoaded] = useState(false)
   useEffect(() => {
     if (!containerRef.current) return null
-    if (!mapRef.current) {
+    if (!loaded) {
+      const coords = JSON.parse(localStorage.getItem("location"))
+      const center = coords
+        ? [coords.latitude, coords.longitude]
+        : [-87.623177, 41.881832]
+      console.log(localStorage.getItem("location"))
       mapbox.accessToken = mapboxKey
       mapRef.current = new mapbox.Map({
         container: containerRef.current,
         style:
           "mapbox://styles/patrick-krawczykowski/cjsl7x3mk01hg1fquho6enkhs",
-        center: [-87.623177, 41.881832],
+        center,
         zoom: 10,
         pitch: 30,
       })
@@ -66,11 +69,12 @@ export default function VehicleMap({ vehicles }) {
           if (err) throw err
           mapRef.current.addImage("transit-bus", img)
         })
+        setLoaded(true)
       })
     }
-  }, [containerRef.current])
+    return () => setLoaded(false)
+  }, [containerRef])
   useEffect(() => {
-    console.log(vehicles)
     if (!mapRef.current) return null
     setOld(vehicles)
     for (let oldVehicle of oldVehicles) {

@@ -1,6 +1,5 @@
-import React, { Fragment } from "react"
 import { ThemeProvider } from "styled-components"
-import BaseStyles from "components/base-styles"
+import Base from "components/Base"
 import "@mdi/font/css/materialdesignicons.min.css"
 
 const colors = {
@@ -31,7 +30,7 @@ const theme = {
 export default function App({ Component, pageProps }) {
   return (
     <ThemeProvider theme={theme}>
-      <BaseStyles />
+      <Base />
       <Component {...pageProps} />
     </ThemeProvider>
   )
